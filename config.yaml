@@ -1,0 +1,45 @@
+PARAMETERS:
+  NAME_ZARR_FOLDER: '2023to2025.zarr'
+  OUTPUT_PATH: /content/drive/MyDrive/ERA5_Data/test
+  VARIABLES: 
+    - 2m_temperature
+    - 10m_u_component_of_wind
+    - 10m_v_component_of_wind
+    - surface_pressure
+    - total_precipitation
+  YEARS: ['2023', '2024', '2025'] 
+  AREA: [23.5, 102, 8.5, 110]
+  STEP_HOURS: 6
+  TARGET_VARS: 
+    - t2m 
+    - u10 
+    - v10 
+    - tp
+    - sp
+  
+
+LOADER: 
+  SEQ_LEN: 16
+  PRED_LEN: 4
+  IMG_SIZE: 256
+  BATCH_SIZE: 4
+  RATIO:
+    TRAIN: 0.8
+    TEST: 0.1
+    VALID: 0.1
+
+MODEL: 
+  NAME: 'swinv2_base_window16_256'
+  PRETRAINED: True
+
+
+TRAIN: 
+  EPOCHS: 100
+  PATIENCE: 20
+  LEARNING_RATE: 0.001
+  WEIGHT_DECAY: 0.0001
+
+
+LOGS: 
+  NAME: SwinV2_Base_Window16_Run_01
+  DIR: /content/drive/MyDrive/Models_ERA5/
