@@ -1,0 +1,16 @@
+dask
+zarr
+xarray 
+netCDF4
+h5netcdf 
+cfgrib
+
+pyyaml
+cdsapi
+leafmap
+numcodecs
+
+timm 
+scipy
+torchinfo
+
