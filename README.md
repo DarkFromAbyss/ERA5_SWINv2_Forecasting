@@ -1,4 +1,4 @@
-![Giphy animation](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjF1cWhoNDI2OWswNDNjMTQzcm1hZ2oza3E1Y2JvdzRkeHA3d2V2diZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/UUtcuagGf96pb6REOJ/giphy.gif)
+# ERA5 SWINv2 Forecasting
 
 [![Python](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-Deep%20Learning-orange.svg)](https://pytorch.org/)
