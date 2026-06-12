@@ -1,0 +1,89 @@
+app:
+  default_variable: t2m
+  map:
+    basemap: OpenStreetMap
+    colormap_temperature: coolwarm
+    initial_center:
+    - 16.0
+    - 108.0
+    initial_zoom: 5
+    wind_style:
+      color: '#ffffff'
+      density: 1.2
+      linewidth: 1.5
+      use_streamlines: true
+  title: Hệ Thống Dự Đoán & Trực Quan Hóa Thời Tiết AI (SwinV2)
+data:
+  crop_region:
+    lat_max: 26.0
+    lat_min: 8.0
+    lon_max: 110.0
+    lon_min: 102.0
+  dataset_name: reanalysis-era5-single-levels
+  end_year: 2025
+  format: netcdf
+  input_steps: 4
+  normalization: z-score
+  predict_steps: 1
+  pressure_levels:
+  - 500
+  - 850
+  - 1000
+  product_type: reanalysis
+  spatial_resolution: 0.25
+  start_year: 2024
+  test_split: 0.1
+  time_step_hours: 6
+  val_split: 0.1
+  variables:
+  - t2m
+  - u10
+  - v10
+global:
+  device: cuda
+  project_name: SwinV2-ERA5-WeatherForecast
+  seed: 42
+  verbose: true
+model:
+  attn_drop_rate: 0.0
+  depths:
+  - 2
+  - 2
+  - 6
+  - 2
+  drop_path_rate: 0.2
+  drop_rate: 0.1
+  embed_dim: 128
+  img_size:
+  - 32
+  - 64
+  in_chans: 20
+  name: SwinTransformerV2_Weather
+  num_heads:
+  - 4
+  - 8
+  - 16
+  - 32
+  out_chans: 5
+  patch_size: 4
+  use_checkpoint: false
+  window_size: 8
+paths:
+  checkpoint_dir: models_checkpoint/
+  log_dir: logs/
+  processed_data_dir: data/processed/
+  raw_data_dir: data/raw/
+  sample_data_dir: data/sample/
+train:
+  batch_size: 16
+  early_stopping_patience: 7
+  epochs: 50
+  loss_function: LatitudeWeightedRMSE
+  optimizer:
+    lr: 0.0005
+    type: AdamW
+    weight_decay: 0.05
+  scheduler:
+    T_max: 50
+    eta_min: 1.0e-06
+    type: CosineAnnealingLR
